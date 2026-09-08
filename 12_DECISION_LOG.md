@@ -1,12 +1,17 @@
-# AI Masterpiece — Decision Log
+# AI Masterpiece — Decision & Evidence Log
 
-Important decisions must retain context and remain revisitable when their assumptions change.
+> This file records proposed decisions, source-derived constraints and decisions that have actually been accepted.
+>
+> **Critical rule:** appearing in this log does not automatically make an item a final technical decision.
 
 ## Decision Record
 
+For significant decisions record:
+
 - ID
 - Date/context
-- Decision
+- Requirement(s)
+- Decision/proposal
 - Status
 - Why
 - Alternatives considered
@@ -15,110 +20,140 @@ Important decisions must retain context and remain revisitable when their assump
 - Consequences
 - Revisit conditions
 
-## Established Decisions
+## Accepted Decision
 
 ### D001 — Existing Hardware First
-Use the current PC initially. Upgrade only when measured workload limitations justify it.
 
-### D002 — Incremental Build
+**Status: DECIDED**
+
+Use the current PC as the starting platform:
+
+- CPU: AMD Ryzen 5 5600X
+- GPU: NVIDIA RTX 3070
+- Motherboard: ASUS TUF B450-Plus Gaming
+
+Upgrade only when measured workload limitations demonstrate that an upgrade solves a real requirement.
+
+---
+
+# Source-Derived Requirements / Constraints
+
+The following were established during the requirements work but are **not implementation decisions**. They constrain later technology selection and architecture research.
+
+### C001 — Incremental Build
 Build in phases and prove each layer before adding unnecessary complexity.
 
-### D003 — Portable Data
+### C002 — Portable Data
 Prefer human-readable and portable formats where practical.
 
-### D004 — Local-Only Initial AI — M001-LOC-01
-Initial AI inference remains on local hardware. No cloud LLM fallback initially. This can be revisited later if a compelling requirement emerges.
+### C003 — Local-Only Initial AI
+Initial AI inference is intended to remain on local hardware. The exact runtime and model are not yet selected.
 
-### D005 — Explicit Execution Authority
-The AI never executes consequential actions merely because it believes they are useful. Explicit user authority is required.
+### C004 — Explicit Execution Authority
+The AI must not execute consequential actions merely because it believes they are useful. Explicit user authority is required.
 
-### D006 — Adaptive Permissions
-Permissions are scoped to risk and task. Higher-risk or external actions require stronger controls.
+### C005 — Adaptive Permissions
+Permissions should be scoped to risk and task. Higher-risk or external actions require stronger controls.
 
-### D007 — Project Permission Inheritance — M002-SEC-33
-An authorised project folder is the filesystem permission boundary. Permissions inherit through contained files/subfolders unless explicitly protected. Network access remains separate. Secrets remain separately controlled.
+### C006 — Project Permission Boundary
+An authorised project folder is a candidate filesystem permission boundary. Permissions may inherit through contained files/subfolders unless explicitly protected. Network access remains separate. Secrets remain separately controlled.
 
-### D008 — No Autonomous Uploads Initially — M002-SEC-14
-The initial system does not independently upload files/user data, submit forms, log in externally or transact.
+**Status: REQUIREMENT / DESIGN CONSTRAINT — implementation not decided.**
 
-### D009 — User-Controlled Downloads — M002-SEC-15
+### C007 — No Autonomous Uploads Initially
+Initial autonomous uploads, external data transmission, form submission, external logins and transactions are prohibited.
+
+### C008 — User-Controlled Downloads
 Downloads require explicit user permission.
 
-### D010 — Separate Execution Approval — M002-SEC-16
-Download approval never implies execution approval. The user must explicitly command execution.
+### C009 — Separate Execution Approval
+Download approval never implies execution approval. Execution requires a separate explicit user command.
 
-### D011 — Task-Scoped Temporary Permissions — M002-SEC-32
-Temporary permissions expire when the authorised task finishes, are resource/action scoped and are logged.
+### C010 — Task-Scoped Temporary Permissions
+Temporary permissions should expire when the authorised task finishes, be resource/action scoped and be logged.
 
-### D012 — No Self-Granted Permissions — M002-SEC-31
-Neither the AI nor the security agent can grant itself additional authority. The user is the final authority.
+### C011 — No Self-Granted Permissions
+Neither the AI nor a security agent may grant itself additional authority. The user remains the final authority.
 
-### D013 — User Authority Over Memory — M001-MEM-02
-The user can inspect, edit, correct, delete and reorganise persistent memory. User corrections outrank AI assumptions.
+### C012 — User Authority Over Memory
+The user must be able to inspect, edit, correct, delete and reorganise persistent memory. User corrections outrank AI assumptions.
 
-### D014 — Raw Archive + Active Knowledge — M001-MEM-14
-Historical records are preserved while active knowledge can evolve without silently destroying history.
+### C013 — Raw Archive + Active Knowledge
+Historical records should be preserved while active knowledge can evolve without silently destroying history.
 
-### D015 — Apprentice Behaviour — M001-TRUST-01
-If the AI does not know, it researches when appropriate; if still uncertain, it asks or says it does not know. It never knowingly guesses.
+### C014 — Apprentice Behaviour
+If the AI does not know, it should research when appropriate; if uncertainty remains, it should ask or say it does not know. It must never knowingly guess.
 
-### D016 — Explicit Correction & Error Learning — M001-TRUST-02
-User corrections override AI assumptions. Important corrections update current knowledge, preserve useful history and trigger checks of related knowledge where necessary.
+### C015 — Explicit Correction & Error Learning
+User corrections override AI assumptions. Important corrections should update current knowledge, preserve useful history and trigger checks of related knowledge where necessary.
 
-### D017 — Persistent Decision History — M001-DECISION-01
-Important decisions retain what, why, alternatives, research, experiments, consequences, date/context and revisit conditions.
+### C016 — Persistent Decision History
+Important decisions should retain what was decided, why, alternatives, research, experiments, consequences, date/context and revisit conditions.
 
-### D018 — Authorised-Source Learning — M001-KNOWLEDGE-01
-The AI may learn from authorised books, PDFs, videos, papers, GitHub repositories, courses, notes and documents while preserving provenance, distinguishing source fact from inference and flagging uncertainty.
+### C017 — Authorised-Source Learning
+The AI may eventually process authorised books, PDFs, videos, papers, GitHub repositories, courses, notes and documents while preserving provenance, distinguishing source fact from inference and flagging uncertainty.
 
-### D019 — Evidence-Based Research Evaluation — M001-RES-02
-Evaluate actual evidence using authority, evidence quality, first-hand experience, relevance, recency, independence, conflicts, transparency and corroboration rather than assuming source categories are automatically equal.
+### C018 — Evidence-Based Research Evaluation
+Research should evaluate actual evidence using factors such as authority, evidence quality, first-hand experience, relevance, recency, independence, conflicts, transparency and corroboration.
 
-### D020 — Preserve Conflicting Credible Evidence — M001-RES-03
+### C019 — Preserve Conflicting Credible Evidence
 When credible sources disagree, investigate the conditions and evidence. If unresolved, preserve both claims and explain the dispute rather than arbitrarily selecting a winner.
 
-### D021 — Confidence-Based Research Conclusions — M001-RES-04
-High-confidence research can become current knowledge. Uncertain, conflicting or important unresolved conclusions go through Inbox/review rather than silently becoming fact.
+### C020 — Confidence-Based Research Conclusions
+High-confidence research may become current knowledge. Uncertain, conflicting or important unresolved conclusions should go through review rather than silently becoming fact.
 
-### D022 — Evolving Research Conclusions — M001-RES-05
+### C021 — Evolving Research Conclusions
 When evidence changes a conclusion, retain the old conclusion as historical and record the new current conclusion, change, date, reason and supporting evidence.
 
-### D023 — Contextual Memory Retrieval — M001-MEM-07
-Retrieval considers relevance, trust, recency, importance and current context. Linked knowledge should reduce unnecessary context stuffing.
+### C022 — Contextual Memory Retrieval
+Retrieval should consider relevance, trust, recency, importance and current context. Linked knowledge should reduce unnecessary context stuffing.
 
-### D024 — Deduplication With Provenance — M001-MEM-17
+### C023 — Deduplication With Provenance
 Consolidate genuine duplicates while preserving provenance and meaningful differences between distinct claims.
 
-### D025 — Low-Risk Automatic Consolidation — M001-MEM-18
-The AI may autonomously organise trusted knowledge, but changes to factual meaning, confidence, interpretation, important relationships or conclusions require review.
+### C024 — Low-Risk Automatic Organisation
+Trusted knowledge may eventually be organised automatically, but changes to factual meaning, confidence, interpretation, important relationships or conclusions require review.
 
-### D026 — Comprehensive Personal Representation — M001-PERSONAL-01
-The AI should eventually maintain a comprehensive authorised representation of the user while retrieving personal information selectively.
+### C025 — Comprehensive Personal Representation
+The system should eventually maintain a comprehensive authorised representation of relevant personal information while retrieving it selectively.
 
-### D027 — Adaptive Personal Learning — M001-PERSONAL-02
+### C026 — Adaptive Personal Learning
 The AI may learn from authorised interactions/sources, but uncertain personal facts require confirmation rather than silent assumption.
 
-### D028 — Memory Transparency — M001-MEM-16
+### C027 — Memory Transparency
 The user should be able to inspect memory details, provenance, confidence, importance, status and history when requested.
 
-### D029 — Selective Freshness — M001-MEM-10
+### C028 — Selective Freshness
 Actively track freshness for information likely to change. Stale information is not automatically false; historical knowledge remains available.
 
-### D030 — Audited Time-Aware Memory — M001-MEM-03
+### C029 — Audited Time-Aware Memory
 When knowledge changes, preserve the previous state and record the new state, date, reason, source and history.
 
-### D031 — Soft Deletion / Forgetting — M001-MEM-04
-Forgotten information leaves normal retrieval but may remain in the historical/audit layer unless explicitly hard-deleted.
+### C030 — Soft Deletion / Forgetting
+Forgotten information should leave normal retrieval while historical/audit information may remain unless explicit hard deletion is required.
 
-### D032 — Adaptive Knowledge Organisation — M001-MEM-06
-Trusted knowledge can be organised and linked automatically; uncertain or materially meaning-changing relationships go to review.
+### C031 — Adaptive Knowledge Organisation
+Trusted knowledge may be organised and linked automatically; uncertain or materially meaning-changing relationships should go to review.
 
-### D033 — PC Management With Explicit Approval — M001-PC
+### C032 — PC Management With Explicit Approval
 The eventual AI may inspect, monitor, diagnose, organise and recommend PC changes and eventually perform approved maintenance. Nothing changes on the PC without explicit user approval.
 
-### D034 — Recovery Independence
+### C033 — Recovery Independence
 The AI must never be the root of control or the sole means of recovering the machine, data or configuration.
 
-## Decision Status Rule
+---
 
-These decisions are source-derived project requirements. Implementation choices remain open until separately researched, compared and explicitly promoted to implementation decisions.
+# Decision Status Rule
+
+A proposal becomes an implementation decision only after:
+
+1. The relevant requirement is understood.
+2. Appropriate research/evidence is gathered.
+3. Alternatives are compared where applicable.
+4. A recommendation is made.
+5. The user explicitly accepts the recommendation.
+6. The decision is documented.
+
+Therefore, during **Phase 0**, most entries above remain **requirements/constraints**, not locked technology choices.
+
+The current technical decision set is intentionally minimal: **existing hardware first**.

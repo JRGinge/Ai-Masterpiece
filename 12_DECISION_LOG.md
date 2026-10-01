@@ -1,10 +1,10 @@
 # AI Masterpiece — Decision & Evidence Log
 
-> This file records proposed decisions, source-derived constraints and decisions that have actually been accepted.
+> This file records durable project decisions, source-derived constraints, experiments and their evidence.
 >
-> **Critical rule:** appearing in this log does not automatically make an item a final technical decision.
+> A technical choice is locked only for the scope explicitly stated in its decision record. Future evidence may justify a new decision and should preserve the old record.
 
-## Decision Record
+## Decision Record Format
 
 For significant decisions record:
 
@@ -12,6 +12,7 @@ For significant decisions record:
 - Date/context
 - Requirement(s)
 - Decision/proposal
+- Scope
 - Status
 - Why
 - Alternatives considered
@@ -20,7 +21,9 @@ For significant decisions record:
 - Consequences
 - Revisit conditions
 
-## Accepted Decision
+---
+
+## Accepted Decisions
 
 ### D001 — Existing Hardware First
 
@@ -36,9 +39,95 @@ Upgrade only when measured workload limitations demonstrate that an upgrade solv
 
 ---
 
-# Source-Derived Requirements / Constraints
+### D002 — Vektor Is the Current Runtime Project Name
 
-The following were established during the requirements work but are **not implementation decisions**. They constrain later technology selection and architecture research.
+**Date:** 2026-09-28 onward
+
+**Status: DECIDED — CURRENT BASELINE**
+
+The active local AI implementation track is named **Vektor**.
+
+The previous Bionic/AI Masterpiece naming remains historical project context; Vektor is the current runtime/system name.
+
+---
+
+### D003 — Claude Code Is the Current Harness
+
+**Status: DECIDED — CURRENT PROTOTYPE**
+
+Claude Code is the control/harness layer used to interact with the local model runtime.
+
+This does not lock Claude Code as the permanent end-state orchestration architecture. It locks its role in the current Vektor prototype.
+
+---
+
+### D004 — llama.cpp Is the Current Local Inference Engine
+
+**Status: DECIDED — CURRENT PROTOTYPE**
+
+llama.cpp is the current local inference engine/server for Vektor.
+
+Current endpoint:
+
+`http://127.0.0.1:8080`
+
+The live API is the source of truth for active runtime verification.
+
+Alternatives such as Ollama, vLLM and other runtimes remain future research options rather than current components.
+
+---
+
+### D005 — Qwen 3.5 9B Q4_K_M Is the Current Local Model
+
+**Status: DECIDED — CURRENT PROTOTYPE**
+
+Qwen 3.5 9B Q4_K_M is the current local Vektor model.
+
+Observed API model ID:
+
+`qwen3.5-9b`
+
+The model has been loaded and exercised through llama.cpp and reached through the Claude Code harness.
+
+This is a current prototype selection, not a claim that it is the permanent or only model Vektor will ever use.
+
+---
+
+### D006 — Direct Claude Code → llama.cpp Path
+
+**Status: DECIDED — CURRENT PROTOTYPE**
+
+The current runtime does not require `cll.exe` or a separate CLL layer.
+
+The architecture is:
+
+```text
+Claude Code → llama.cpp API → Qwen 3.5 9B
+```
+
+The earlier CLL-based setup is retained as historical troubleshooting context and is considered retired.
+
+---
+
+### D007 — Read-Only Vektor Doctor
+
+**Status: DECIDED — IMPLEMENTATION REQUIRED**
+
+The runtime doctor must inspect and report state without modifying existing files, configuration or runtime decisions.
+
+It should verify at minimum:
+
+- expected executables
+- expected model file
+- server/port
+- API health
+- active model ID
+- expected model match
+- basic runtime identity
+
+---
+
+# Source-Derived Requirements / Constraints
 
 ### C001 — Incremental Build
 Build in phases and prove each layer before adding unnecessary complexity.
@@ -47,7 +136,7 @@ Build in phases and prove each layer before adding unnecessary complexity.
 Prefer human-readable and portable formats where practical.
 
 ### C003 — Local-Only Initial AI
-Initial AI inference is intended to remain on local hardware. The exact runtime and model are not yet selected.
+Initial AI inference is intended to remain on local hardware.
 
 ### C004 — Explicit Execution Authority
 The AI must not execute consequential actions merely because it believes they are useful. Explicit user authority is required.
@@ -56,9 +145,7 @@ The AI must not execute consequential actions merely because it believes they ar
 Permissions should be scoped to risk and task. Higher-risk or external actions require stronger controls.
 
 ### C006 — Project Permission Boundary
-An authorised project folder is a candidate filesystem permission boundary. Permissions may inherit through contained files/subfolders unless explicitly protected. Network access remains separate. Secrets remain separately controlled.
-
-**Status: REQUIREMENT / DESIGN CONSTRAINT — implementation not decided.**
+An authorised project folder is a candidate filesystem permission boundary. Network access remains separate. Secrets remain separately controlled.
 
 ### C007 — No Autonomous Uploads Initially
 Initial autonomous uploads, external data transmission, form submission, external logins and transactions are prohibited.
@@ -91,46 +178,46 @@ User corrections override AI assumptions. Important corrections should update cu
 Important decisions should retain what was decided, why, alternatives, research, experiments, consequences, date/context and revisit conditions.
 
 ### C017 — Authorised-Source Learning
-The AI may eventually process authorised books, PDFs, videos, papers, GitHub repositories, courses, notes and documents while preserving provenance, distinguishing source fact from inference and flagging uncertainty.
+The AI may eventually process authorised books, PDFs, videos, papers, GitHub repositories, courses, notes and documents while preserving provenance and uncertainty.
 
 ### C018 — Evidence-Based Research Evaluation
-Research should evaluate actual evidence using factors such as authority, evidence quality, first-hand experience, relevance, recency, independence, conflicts, transparency and corroboration.
+Research should evaluate evidence using authority, quality, relevance, recency, independence, conflicts, transparency and corroboration.
 
 ### C019 — Preserve Conflicting Credible Evidence
-When credible sources disagree, investigate the conditions and evidence. If unresolved, preserve both claims and explain the dispute rather than arbitrarily selecting a winner.
+When credible sources disagree, investigate the conditions and evidence. If unresolved, preserve the dispute rather than arbitrarily selecting a winner.
 
 ### C020 — Confidence-Based Research Conclusions
-High-confidence research may become current knowledge. Uncertain, conflicting or important unresolved conclusions should go through review rather than silently becoming fact.
+High-confidence research may become current knowledge. Uncertain, conflicting or important unresolved conclusions should go through review.
 
 ### C021 — Evolving Research Conclusions
-When evidence changes a conclusion, retain the old conclusion as historical and record the new current conclusion, change, date, reason and supporting evidence.
+When evidence changes a conclusion, retain the old conclusion as historical and record the new current conclusion, date, reason and evidence.
 
 ### C022 — Contextual Memory Retrieval
-Retrieval should consider relevance, trust, recency, importance and current context. Linked knowledge should reduce unnecessary context stuffing.
+Retrieval should consider relevance, trust, recency, importance and current context.
 
 ### C023 — Deduplication With Provenance
-Consolidate genuine duplicates while preserving provenance and meaningful differences between distinct claims.
+Consolidate genuine duplicates while preserving provenance and meaningful differences.
 
 ### C024 — Low-Risk Automatic Organisation
-Trusted knowledge may eventually be organised automatically, but changes to factual meaning, confidence, interpretation, important relationships or conclusions require review.
+Trusted knowledge may eventually be organised automatically, but changes to factual meaning or important conclusions require review.
 
 ### C025 — Comprehensive Personal Representation
 The system should eventually maintain a comprehensive authorised representation of relevant personal information while retrieving it selectively.
 
 ### C026 — Adaptive Personal Learning
-The AI may learn from authorised interactions/sources, but uncertain personal facts require confirmation rather than silent assumption.
+The AI may learn from authorised interactions/sources, but uncertain personal facts require confirmation.
 
 ### C027 — Memory Transparency
-The user should be able to inspect memory details, provenance, confidence, importance, status and history when requested.
+The user should be able to inspect memory details, provenance, confidence, importance, status and history.
 
 ### C028 — Selective Freshness
-Actively track freshness for information likely to change. Stale information is not automatically false; historical knowledge remains available.
+Track freshness for information likely to change. Historical knowledge remains available.
 
 ### C029 — Audited Time-Aware Memory
-When knowledge changes, preserve the previous state and record the new state, date, reason, source and history.
+When knowledge changes, preserve previous state and record new state, date, reason, source and history.
 
 ### C030 — Soft Deletion / Forgetting
-Forgotten information should leave normal retrieval while historical/audit information may remain unless explicit hard deletion is required.
+Forgotten information should leave normal retrieval while historical/audit information may remain unless hard deletion is explicitly required.
 
 ### C031 — Adaptive Knowledge Organisation
 Trusted knowledge may be organised and linked automatically; uncertain or materially meaning-changing relationships should go to review.
@@ -143,9 +230,9 @@ The AI must never be the root of control or the sole means of recovering the mac
 
 ---
 
-# Decision Status Rule
+## Decision State Rule
 
-A proposal becomes an implementation decision only after:
+A future major technical choice becomes an implementation decision only after:
 
 1. The relevant requirement is understood.
 2. Appropriate research/evidence is gathered.
@@ -154,6 +241,4 @@ A proposal becomes an implementation decision only after:
 5. The user explicitly accepts the recommendation.
 6. The decision is documented.
 
-Therefore, during **Phase 0**, most entries above remain **requirements/constraints**, not locked technology choices.
-
-The current technical decision set is intentionally minimal: **existing hardware first**.
+The Vektor core is now an exception only in the sense that the user has explicitly accepted the tested prototype choices after hands-on experimentation. The choices remain scoped to the current implementation baseline and can be superseded by a new documented decision.

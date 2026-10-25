@@ -4,49 +4,45 @@ A local-first personal AI system designed to be useful, secure, reliable, mainta
 
 ## Current Status — 25 October 2026
 
-**Project:** AI Masterpiece
-**Current implementation track:** Vektor
-**Overall state:** Phase 0 research/design; local inference prototype was previously verified, while the current OpenCode integration is awaiting re-verification
-**Production status:** Not production-ready
+**Project:** AI Masterpiece  
+**Current implementation track:** Vektor  
+**Current harness:** OpenCode  
+**Local inference:** llama.cpp → Qwen 3.5 9B  
+**Production status:** Not production-ready; the core integration checks have passed, but wider safety, recovery and reliability acceptance remains.
 
-The project has now crossed from pure planning into controlled implementation experiments. The first implementation milestone is the **Vektor Local Core**.
+The OpenCode integration was configured and tested on 25 October 2026. The user reports that all four acceptance checks passed: launcher/server startup, a prompt through OpenCode to the local model, global GitHub MCP visibility from another project, and a read-only repository README test. This is a user-reported test result, not independent inspection of the PC from GitHub.
 
 ```text
 VEKTOR
   ↓
-OpenCode               [CURRENT AGENT HARNESS — INTEGRATION TO RE-VERIFY]
+OpenCode               [CURRENT HARNESS — BASIC INTEGRATION TESTS PASSED]
   ↓
-llama.cpp              [INFERENCE ENGINE]
+llama.cpp              [LOCAL INFERENCE ENGINE]
   ↓
-Qwen 3.5 9B Q4_K_M    [CURRENT LOCAL MODEL]
+Qwen 3.5 9B            [LOCAL MODEL]
+  
+OpenCode ── GitHub MCP [GLOBAL USER CONFIG — CONNECTIVITY/READ TEST REPORTED PASS]
 ```
 
-Morphy is a GUI/control-room candidate under evaluation, not a locked component. Claude Code was superseded as the primary harness on 4 October 2026.
+The active workspace used for the setup is `D:\Users\jenso\Desktop\AI\Testing`. The launcher `Vektor-OpenCode.bat` was updated to target Testing. `Testing\opencode.json` was checked as valid JSON and retains the local model configuration. GitHub MCP configuration was consolidated into OpenCode's global user configuration; the duplicate project-level entry was removed from Testing's config. The user reports that GitHub was then successfully used from another project and for a read-only README test.
 
-### Previously verified local inference prototype (1 October 2026; historical evidence)
+The full application has not thereby become production-ready. Tool permissions, safety boundaries, long-running stability, recovery, benchmark reproducibility, and advanced capabilities still require separate acceptance.
 
-- The earlier test recorded the llama.cpp executable and Qwen model file as present
-- The earlier test recorded the API at `http://127.0.0.1:8080`, health success, and model ID `qwen3.5-9b`
-- These observations are historical and have not been rechecked as part of this documentation update
-- local inference was successfully exercised through the former Claude Code harness
-- OpenCode is the accepted current harness, but its connection to the local endpoint must be re-verified
-
-The local inference path was previously exercised, but current server state and OpenCode integration are **not freshly verified**. This is not a declaration that the wider Vektor system is complete.
+Morphy is a GUI/control-room candidate under evaluation, not a locked component. Claude Code was superseded as the primary harness by OpenCode on 4 October 2026.
 
 ## Current Technical Decisions
 
-The following are locked as the current implementation baseline, subject to later evidence-based revision:
-
 1. **Vektor** is the current system/runtime project name.
-2. **OpenCode** is the current agent harness/control layer (decision accepted 4 October 2026; live integration still requires verification).
+2. **OpenCode** is the current agent harness/control layer.
 3. **llama.cpp** is the current local inference engine.
-4. **Qwen 3.5 9B Q4_K_M** is the current local model.
-5. The expected local inference endpoint is `http://127.0.0.1:8080`; confirm it during the next read-only runtime audit.
-6. The live llama.cpp API is the runtime source of truth when verifying the active model/service.
-7. **CLL is retired from the architecture**; it is not required for the current OpenCode → llama.cpp path.
+4. **Qwen 3.5 9B** is the current local model family/selection. Confirm the exact active quantization and runtime properties during the read-only runtime audit; earlier records differ between documented Q4_K_M and a historical runtime report of Q4_K.
+5. The expected local inference endpoint is `http://127.0.0.1:8080`; confirm the live service state during audits.
+6. The live llama.cpp API is the runtime source of truth for active model/service state.
+7. **CLL is retired** and not required for the current OpenCode → llama.cpp path.
 8. The existing PC remains the starting hardware platform.
+9. GitHub MCP is configured in OpenCode's global user configuration; keep credentials out of project files and logs.
 
-These decisions lock the **current prototype**, not every future subsystem. Memory, Obsidian, MCP, agents, routing, automation, voice, cloud split and advanced computer control remain separate design decisions.
+These decisions lock the current prototype, not every future subsystem. Memory, Obsidian, additional MCP tools, agents, routing, automation, voice, cloud split and advanced computer control remain separate design decisions.
 
 ## Vektor Operating Workflow
 
@@ -64,7 +60,7 @@ EXECUTE
 VERIFY
 ```
 
-The model cannot grant itself permissions. Capability and authority remain separate.
+The model cannot grant itself permissions. Capability and authority remain separate. Inspection should be read-only by default; consequential changes require explicit user approval.
 
 ## Project Control
 
@@ -76,20 +72,32 @@ The model cannot grant itself permissions. Capability and authority remain separ
 
 **RESEARCH → DECISION → BUILD → TEST → VERIFY → DOCUMENT**
 
-## Next Milestone
+## Current Milestone — Vektor 01: Stable Local Core
 
-### Vektor Milestone 01 — Stable Local Core
+### Reported complete on 25 October 2026
 
-Remaining acceptance work:
+- [x] Updated `Vektor-OpenCode.bat` to start the local server and open OpenCode in Testing
+- [x] `Testing\opencode.json` validated as JSON and retains local model configuration
+- [x] OpenCode launcher and local llama.cpp server start successfully
+- [x] A prompt through OpenCode successfully reaches Qwen 3.5 9B
+- [x] GitHub MCP reports connected in OpenCode CLI
+- [x] GitHub MCP configuration consolidated in global user configuration; duplicate project-level entry removed
+- [x] GitHub MCP confirmed available from another project
+- [x] Read-only repository README test completed successfully
+- [x] `start-claude.bat` and `vektor.bat` removed as requested; OC Playground retained
 
-- [ ] Verify OpenCode version, effective configuration, selected provider/model and connection to llama.cpp
-- [ ] Final read-only Vektor Doctor
-- [ ] Reproducible startup procedure
-- [ ] Repeatable benchmark/verification record
-- [ ] Runtime documentation committed
-- [ ] Trello state reconciled with the implementation
-- [ ] Evaluate Morphy as an optional GUI without treating it as selected until approved
-- [ ] Confirm recovery/restart procedure
+These are user-reported results from the 25 October setup session. The source report and scope/limits are recorded in `reports/2026-10-25-opencode-github-mcp-verification.md`.
+
+### Remaining acceptance work
+
+- [ ] Final read-only Vektor Doctor: inspect effective OpenCode config/permissions, runtime health, model identity and selected provider/model
+- [ ] Record OpenCode version and effective configuration sources
+- [ ] Reconcile exact active quantization and context settings against the live API; preserve discrepancies rather than silently changing them
+- [ ] Establish reproducible startup and restart/recovery procedures
+- [ ] Record repeatable benchmark and verification evidence
+- [ ] Audit command execution, filesystem, MCP and network permissions; preserve approval-first behaviour
+- [ ] Verify required tool-calling behaviour with the selected local model
+- [ ] Evaluate Morphy separately without treating it as selected until approved
 
 Only after this milestone should additional layers be added.
 
@@ -100,12 +108,12 @@ Only after this milestone should additional layers be added.
 - PC changes require explicit user approval.
 - Downloads require permission.
 - Execution requires a separate explicit command.
-- Initial AI inference is local-only.
-- External data transmission is restricted.
+- Initial AI inference is local-first; any external transmission must be understood and authorised.
 - Project-folder permissions may inherit; secrets remain separately protected.
 - Temporary permissions expire with the authorised task.
 - The AI must never knowingly guess.
 - The system must remain recoverable without the AI.
+- External content must not override system instructions, permissions or security policy.
 
 ## Repository Structure
 
@@ -126,6 +134,7 @@ Only after this milestone should additional layers be added.
 - `14_SECOND_MIND.md` — Second Mind design
 - `VEKTOR.md` — Vektor operating model and architecture
 - `VEKTOR_RUNTIME.md` — exact local runtime record
+- `reports/` — dated verification and reconciliation reports
 - `research/` — source-derived research
 - `experiments/` — reproducible tests/benchmarks
 - `configs/` — configuration records

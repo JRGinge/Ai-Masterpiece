@@ -2,7 +2,7 @@
 
 > **Status:** Phase 0 / controlled implementation
 > **Current implementation:** Vektor Local Core
-> **Build status:** Verified prototype; Milestone 01 acceptance work remains
+> **Build status:** Local inference prototype previously verified; OpenCode integration and Milestone 01 acceptance work remain
 > **Record date:** 25 October 2026
 
 ## Current State
@@ -33,9 +33,9 @@ These choices are locked for the current Vektor implementation baseline because 
 |---|---|---|
 | System/runtime name | Vektor | DECIDED — CURRENT BASELINE |
 | Harness/control | OpenCode | DECIDED — INTEGRATION RE-VERIFICATION PENDING |
-| Inference engine | llama.cpp | VERIFIED |
-| Local model | Qwen 3.5 9B Q4_K_M | VERIFIED |
-| API endpoint | `http://127.0.0.1:8080` | VERIFIED |
+| Inference engine | llama.cpp | PREVIOUSLY VERIFIED — RECHECK LIVE STATE |
+| Local model | Qwen 3.5 9B Q4_K_M | CURRENT MODEL DECISION — ACTIVE MODEL TO RECHECK |
+| API endpoint | `http://127.0.0.1:8080` | EXPECTED ENDPOINT — LIVE STATE TO RECHECK |
 | Runtime source of truth | Live llama.cpp API | DECIDED |
 | CLL | Retired / not required | RETIRED |
 | Starting hardware | Existing Ryzen 5 5600X / RTX 3070 PC | DECIDED |
@@ -63,7 +63,7 @@ The AI may inspect, analyse and propose. It cannot grant itself authority. Conse
 ## Current Verified Evidence
 
 - llama.cpp executable is present and runnable.
-- Qwen 3.5 9B Q4_K_M model is present.
+- The earlier audit recorded the Qwen 3.5 9B Q4_K_M model file as present; recheck the current file and active server model.
 - llama.cpp server starts on port 8080.
 - `/health` responds successfully.
 - `/v1/models` exposes `qwen3.5-9b`.

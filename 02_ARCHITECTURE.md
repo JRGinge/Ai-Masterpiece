@@ -1,6 +1,6 @@
 # AI Masterpiece — Architecture
 
-## Status — 1 October 2026
+## Status — 25 October 2026
 
 **Current state:** Vektor local core architecture is locked as the verified implementation baseline. The wider system architecture remains deliberately modular and is not fully locked.
 
@@ -9,15 +9,17 @@
 ```text
 USER
   ↓
-Claude Code
-  [HARNESS / CONTROL LAYER]
+OpenCode
+  [CURRENT AGENT HARNESS — INTEGRATION RE-VERIFICATION PENDING]
   ↓
 llama.cpp
   [LOCAL INFERENCE ENGINE]
   ↓
 Qwen 3.5 9B Q4_K_M
-  [CURRENT LOCAL MODEL]
+  [CURRENT MODEL DECISION]
 ```
+
+Morphy is a GUI/control-room candidate only; it is not part of the locked runtime path. Claude Code was superseded as the primary harness on 4 October 2026.
 
 Runtime endpoint:
 
@@ -30,7 +32,7 @@ The live llama.cpp API is the source of truth for active runtime/model verificat
 ## Locked Current Choices
 
 - Project/runtime name: **Vektor**
-- Harness: **Claude Code**
+- Harness: **OpenCode** (accepted current baseline; live integration not yet re-verified)
 - Inference engine: **llama.cpp**
 - Current model: **Qwen 3.5 9B Q4_K_M**
 - API endpoint: **http://127.0.0.1:8080**
@@ -55,6 +57,12 @@ VERIFY
 ```
 
 This is the intended control discipline. A model may propose or request an action but cannot grant itself authority.
+
+## GUI / Interface Status
+
+- **Current harness:** OpenCode.
+- **GUI candidate:** Morphy, evaluation pending; not yet selected.
+- **Runtime management:** llama.cpp's API remains the local inference interface. A GUI choice does not itself change the runtime architecture.
 
 ## Wider Architecture — Future Layers
 

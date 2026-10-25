@@ -55,7 +55,7 @@ The previous Bionic/AI Masterpiece naming remains historical project context; Ve
 
 **Date:** 2026-10-01
 
-**Status: SUPERSEDED — HISTORICAL DECISION
+**Status:** SUPERSEDED — HISTORICAL DECISION
 
 Claude Code was the control/harness layer used in the first verified Vektor local-core prototype. This decision was superseded by D008 on 4 October 2026. The successful Claude Code test remains historical evidence and does not prove OpenCode integration.
 

@@ -3,7 +3,7 @@
 > **Status:** Phase 0 / controlled implementation
 > **Current implementation:** Vektor Local Core
 > **Build status:** Verified prototype; Milestone 01 acceptance work remains
-> **Record date:** 1 October 2026
+> **Record date:** 25 October 2026
 
 ## Current State
 
@@ -12,12 +12,14 @@ AI Masterpiece has moved beyond planning-only work. The current implementation t
 ```text
 VEKTOR
   ↓
-Claude Code              [HARNESS / CONTROL]
+OpenCode                 [CURRENT AGENT HARNESS — INTEGRATION TO RE-VERIFY]
   ↓
 llama.cpp                [LOCAL INFERENCE]
   ↓
-Qwen 3.5 9B Q4_K_M      [CURRENT MODEL]
+Qwen 3.5 9B Q4_K_M      [CURRENT MODEL DECISION]
 ```
+
+Morphy is a possible GUI/control-room layer under evaluation, not a locked component. Claude Code was superseded as the primary harness on 4 October 2026.
 
 Current runtime endpoint: `http://127.0.0.1:8080`.
 
@@ -30,7 +32,7 @@ These choices are locked for the current Vektor implementation baseline because 
 | Item | Current choice | State |
 |---|---|---|
 | System/runtime name | Vektor | DECIDED — CURRENT BASELINE |
-| Harness/control | Claude Code | VERIFIED |
+| Harness/control | OpenCode | DECIDED — INTEGRATION RE-VERIFICATION PENDING |
 | Inference engine | llama.cpp | VERIFIED |
 | Local model | Qwen 3.5 9B Q4_K_M | VERIFIED |
 | API endpoint | `http://127.0.0.1:8080` | VERIFIED |
@@ -66,7 +68,7 @@ The AI may inspect, analyse and propose. It cannot grant itself authority. Conse
 - `/health` responds successfully.
 - `/v1/models` exposes `qwen3.5-9b`.
 - The API reports the local llama.cpp runtime identity.
-- Claude Code reaches the local endpoint.
+- Claude Code reached the local endpoint in the previous setup; this does not verify OpenCode.
 - Local inference has been exercised successfully.
 
 A server instance with PID `18384` was observed during diagnosis. This is historical runtime evidence only; PIDs are not persistent configuration.
@@ -109,11 +111,12 @@ Completed:
 - [x] llama.cpp API runs
 - [x] Health endpoint works
 - [x] Model endpoint works
-- [x] Claude Code connects
+- [ ] OpenCode connects to the local endpoint (re-verify after harness change)
 - [x] Local inference works
 
 Remaining:
 
+- [ ] Verify OpenCode version/config/provider/model and local API integration
 - [ ] Final read-only Vektor Doctor
 - [ ] Reproducible startup procedure
 - [ ] Repeatable benchmark/verification record
@@ -142,7 +145,7 @@ Remaining:
 
 **Vektor** is the current local system/runtime implementation name.
 
-The earlier CLL-based launcher path is retired; the current architecture uses Claude Code directly against the llama.cpp API.
+The earlier CLL-based launcher path remains retired. Claude Code's previous direct API path is historical; OpenCode is the accepted current harness and its live integration is not yet verified.
 
 ## Decision / Build Discipline
 

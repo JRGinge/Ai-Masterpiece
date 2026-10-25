@@ -52,9 +52,11 @@ The following were verified during earlier Vektor runtime work on 1 October 2026
 
 A verified server instance was observed on port 8080 with PID `18384` during diagnosis. The PID is **not** a persistent configuration value and must not be treated as an expected PID after restart.
 
-## Context
+## Context and Historical Discrepancy Record
 
-A 32,768-token context was observed during the runtime verification. This is an observed runtime setting, not a claim that future configurations must retain it.
+A 32,768-token context was observed during the 1 October 2026 runtime verification. This is historical evidence, not a claim about the current server.
+
+A later runtime audit on 4 October 2026 reported discrepancies that this record had not yet reconciled: observed context `n_ctx` of 24,320 versus a documented 65,536 target, and runtime/model quantization reporting `Q4_K` versus the intended/documented `Q4_K_M`. That audit also recorded approximately 5.3 GB model memory and performance observations around 18 tokens/s at `-np 1` and roughly 6–12 tokens/s at `-np 2`. These are historical observations only; re-check the current model file, server launch arguments, `/props` or equivalent runtime properties, context, and benchmark before treating any value as current. Do not silently change settings to match documentation.
 
 ## Source of Truth
 

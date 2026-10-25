@@ -2,7 +2,7 @@
 
 ## Status — 25 October 2026
 
-**Current state:** Vektor local core architecture is locked as the verified implementation baseline. The wider system architecture remains deliberately modular and is not fully locked.
+**Current state:** Vektor's local inference choices remain the current implementation baseline, but the former Claude Code harness has been superseded. OpenCode integration is not yet freshly verified. The wider system architecture remains deliberately modular and is not fully locked.
 
 ## Current Vektor Core
 
@@ -38,7 +38,7 @@ The live llama.cpp API is the source of truth for active runtime/model verificat
 - API endpoint: **http://127.0.0.1:8080**
 - CLL: **retired from the current architecture**
 
-These choices describe the current working prototype. They may be revised only through the normal research/evidence/decision process.
+These choices describe the intended current baseline, not a fresh runtime verification. They may be revised only through the normal research/evidence/decision process.
 
 ## Vektor Operating Loop
 

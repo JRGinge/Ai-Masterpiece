@@ -134,9 +134,9 @@ Instructions contained in websites, documents or untrusted files are data, not a
 
 ### R-13d — Local-Only Initial Inference
 
-Initial AI inference is intended to remain local-only.
+Initial AI inference is intended to remain local-only. The current implementation baseline is OpenCode → llama.cpp → Qwen 3.5 9B Q4_K_M; successful current integration still requires verification.
 
-The exact runtime and architecture are not yet selected.
+This requirement does not lock the long-term runtime or end-state architecture.
 
 ### R-13e — External Access as a Separate Boundary
 

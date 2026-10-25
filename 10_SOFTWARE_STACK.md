@@ -1,6 +1,6 @@
 # AI Masterpiece — Software Stack
 
-## Status — 1 October 2026
+## Status — 25 October 2026
 
 The **Vektor local core** is now locked as the current working prototype. The wider software stack remains open where implementation evidence is not yet available.
 
@@ -9,7 +9,7 @@ The **Vektor local core** is now locked as the current working prototype. The wi
 | Layer | Choice | State |
 |---|---|---|
 | Project/runtime | Vektor | **LOCKED CURRENT BASELINE** |
-| Harness/control | Claude Code | **VERIFIED** |
+| Harness/control | OpenCode | **DECIDED — INTEGRATION RE-VERIFICATION PENDING** |
 | Local inference | llama.cpp | **VERIFIED** |
 | Local model | Qwen 3.5 9B Q4_K_M | **VERIFIED** |
 | API endpoint | `http://127.0.0.1:8080` | **VERIFIED** |
@@ -18,6 +18,10 @@ The **Vektor local core** is now locked as the current working prototype. The wi
 ## Runtime Principle
 
 The live llama.cpp API is the source of truth for runtime state. Documentation records the expected configuration, while health/model endpoints establish what is actually running.
+
+## GUI Candidate (Not Yet Selected)
+
+Morphy is being considered as a visual control-room/workspace. It must be tested alongside the current OpenCode setup before any migration or dependency decision. Do not describe it as selected or installed without evidence.
 
 ## Still Open / Future Research
 

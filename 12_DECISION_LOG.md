@@ -51,13 +51,13 @@ The previous Bionic/AI Masterpiece naming remains historical project context; Ve
 
 ---
 
-### D003 — Claude Code Is the Current Harness
+### D003 — Claude Code Was the Initial Harness
 
-**Status: DECIDED — CURRENT PROTOTYPE**
+**Date:** 2026-10-01
 
-Claude Code is the control/harness layer used to interact with the local model runtime.
+**Status: SUPERSEDED — HISTORICAL DECISION
 
-This does not lock Claude Code as the permanent end-state orchestration architecture. It locks its role in the current Vektor prototype.
+Claude Code was the control/harness layer used in the first verified Vektor local-core prototype. This decision was superseded by D008 on 4 October 2026. The successful Claude Code test remains historical evidence and does not prove OpenCode integration.
 
 ---
 
@@ -93,21 +93,41 @@ This is a current prototype selection, not a claim that it is the permanent or o
 
 ---
 
-### D006 — Direct Claude Code → llama.cpp Path
+### D006 — Retire the CLL Launcher Path
 
-**Status: DECIDED — CURRENT PROTOTYPE**
+**Status: DECIDED — CURRENT**
 
-The current runtime does not require `cll.exe` or a separate CLL layer.
-
-The architecture is:
-
-```text
-Claude Code → llama.cpp API → Qwen 3.5 9B
-```
-
-The earlier CLL-based setup is retained as historical troubleshooting context and is considered retired.
+The runtime does not require `cll.exe` or a separate CLL layer. The earlier CLL-based setup is retained as historical troubleshooting context and is considered retired. The harness was subsequently changed by D008.
 
 ---
+
+### D008 — OpenCode Is the Current Harness
+
+**Date:** 2026-10-04
+
+**Status: DECIDED — CURRENT BASELINE; INTEGRATION VERIFICATION PENDING**
+
+The user accepted replacing Claude Code with OpenCode as Vektor's primary agent harness.
+
+**Current architecture decision:**
+
+```text
+Vektor → OpenCode → llama.cpp API (127.0.0.1:8080) → Qwen 3.5 9B Q4_K_M
+```
+
+**Scope:** Current implementation baseline, not a claim of production readiness or a verified live connection.
+
+**Reason:** The project moved its harness/control layer to OpenCode. Claude Code-specific paths and assumptions must not remain in current-state documentation.
+
+**Verification still required:** Record the installed OpenCode version, effective configuration, provider/model selection, API connection, and required tool-calling behaviour. The live llama.cpp API remains the source of truth for active server/model state.
+
+### D009 — Morphy Is a GUI Candidate, Not a Locked Component
+
+**Date:** 2026-10-24
+
+**Status: PROPOSED / EVALUATION PENDING**
+
+Morphy may provide a visual control-room/workspace while OpenCode remains the agent engine. This is not an approved migration or a locked dependency. Test alongside the current setup, inspect permissions and local-data/network behaviour, and record evidence before making a selection.
 
 ### D007 — Read-Only Vektor Doctor
 

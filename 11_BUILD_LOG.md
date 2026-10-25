@@ -59,7 +59,7 @@ Qwen 3.5 9B Q4_K_M
 
 ### Known Diagnostic History
 
-Earlier setup attempts encountered a missing `cll.exe` path and API connection failures. The architecture was simplified so Claude Code connects directly to llama.cpp; CLL is no longer part of the current runtime.
+At the time of this historical test, earlier setup attempts encountered a missing `cll.exe` path and API connection failures. The setup was simplified so Claude Code connected directly to llama.cpp. CLL remains retired; OpenCode is now the accepted harness, pending fresh integration verification.
 
 The Vektor Doctor is intended to be **read-only**: inspect and report runtime state without modifying existing configuration or files.
 

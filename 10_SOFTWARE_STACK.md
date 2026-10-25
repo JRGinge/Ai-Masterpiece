@@ -2,7 +2,7 @@
 
 ## Status — 25 October 2026
 
-The **Vektor local core** is now locked as the current working prototype. The wider software stack remains open where implementation evidence is not yet available.
+The **Vektor local-core design baseline** is locked for now. The inference path was previously tested, but current live state and OpenCode integration still require verification. The wider software stack remains open where implementation evidence is not yet available.
 
 ## Current Locked Core
 
@@ -10,9 +10,9 @@ The **Vektor local core** is now locked as the current working prototype. The wi
 |---|---|---|
 | Project/runtime | Vektor | **LOCKED CURRENT BASELINE** |
 | Harness/control | OpenCode | **DECIDED — INTEGRATION RE-VERIFICATION PENDING** |
-| Local inference | llama.cpp | **VERIFIED** |
-| Local model | Qwen 3.5 9B Q4_K_M | **VERIFIED** |
-| API endpoint | `http://127.0.0.1:8080` | **VERIFIED** |
+| Local inference | llama.cpp | **PREVIOUSLY VERIFIED — LIVE STATE TO RECHECK** |
+| Local model | Qwen 3.5 9B Q4_K_M | **CURRENT MODEL DECISION — ACTIVE MODEL TO RECHECK** |
+| API endpoint | `http://127.0.0.1:8080` | **EXPECTED ENDPOINT — LIVE STATE TO RECHECK** |
 | CLL | None | **RETIRED / NOT REQUIRED** |
 
 ## Runtime Principle

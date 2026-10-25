@@ -1,8 +1,8 @@
 # AI Masterpiece — Build Log
 
-## Current Build Status — 1 October 2026
+## Current Build Status — 25 October 2026
 
-**Vektor Local Core:** VERIFIED PROTOTYPE
+**Vektor Local Inference Core:** previously verified prototype; current OpenCode harness integration needs re-verification
 
 The project has moved from planning-only into controlled implementation. The first implementation milestone establishes a working local inference path without claiming that the wider Vektor system is production-ready.
 
@@ -10,10 +10,28 @@ The project has moved from planning-only into controlled implementation. The fir
 
 # Vektor Milestone 01 — Local Core
 
+## Architecture Reconciliation — 25 October 2026
+
+The 1 October build record below documents the earlier Claude Code harness and is retained as historical evidence. On 4 October, the user accepted OpenCode as the current harness, replacing Claude Code. The current architecture is OpenCode → llama.cpp API (`127.0.0.1:8080`) → Qwen 3.5 9B Q4_K_M. This document update does not claim that OpenCode is currently configured or successfully connected; that requires a fresh read-only verification.
+
+Morphy was discussed on 24 October as a possible GUI/control-room layer. It remains an evaluation candidate, not a selected component.
+
+### Follow-up acceptance checks
+
+- [ ] Record installed OpenCode version and effective config source(s)
+- [ ] Confirm selected provider and model ID
+- [ ] Verify OpenCode reaches the local llama.cpp API
+- [ ] Verify tool calling/agent features required by Vektor against the selected model
+- [ ] Keep Morphy out of the runtime baseline unless separately tested and approved
+
+---
+
+## Historical Build Record — 1 October 2026
+
 ### Architecture
 
 ```text
-Claude Code
+Claude Code [historical harness at time of this test]
     ↓
 llama.cpp
     ↓

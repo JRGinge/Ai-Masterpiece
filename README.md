@@ -6,7 +6,7 @@ A local-first personal AI system designed to be useful, secure, reliable, mainta
 
 **Project:** AI Masterpiece
 **Current implementation track:** Vektor
-**Overall state:** Phase 0 research/design with a verified local-runtime prototype
+**Overall state:** Phase 0 research/design; local inference prototype was previously verified, while the current OpenCode integration is awaiting re-verification
 **Production status:** Not production-ready
 
 The project has now crossed from pure planning into controlled implementation experiments. The first implementation milestone is the **Vektor Local Core**.
@@ -23,18 +23,15 @@ Qwen 3.5 9B Q4_K_M    [CURRENT LOCAL MODEL]
 
 Morphy is a GUI/control-room candidate under evaluation, not a locked component. Claude Code was superseded as the primary harness on 4 October 2026.
 
-### Verified prototype
+### Previously verified local inference prototype (1 October 2026; historical evidence)
 
-- llama.cpp executable present and runnable
-- Qwen 3.5 9B Q4_K_M model present
-- llama.cpp API running on `http://127.0.0.1:8080`
-- health endpoint verified
-- OpenAI-compatible model endpoint verified
-- model ID observed as `qwen3.5-9b`
+- The earlier test recorded the llama.cpp executable and Qwen model file as present
+- The earlier test recorded the API at `http://127.0.0.1:8080`, health success, and model ID `qwen3.5-9b`
+- These observations are historical and have not been rechecked as part of this documentation update
 - local inference was successfully exercised through the former Claude Code harness
 - OpenCode is the accepted current harness, but its connection to the local endpoint must be re-verified
 
-This is a **verified prototype**, not a declaration that the whole Vektor system is complete.
+The local inference path was previously exercised, but current server state and OpenCode integration are **not freshly verified**. This is not a declaration that the wider Vektor system is complete.
 
 ## Current Technical Decisions
 
@@ -44,7 +41,7 @@ The following are locked as the current implementation baseline, subject to late
 2. **OpenCode** is the current agent harness/control layer (decision accepted 4 October 2026; live integration still requires verification).
 3. **llama.cpp** is the current local inference engine.
 4. **Qwen 3.5 9B Q4_K_M** is the current local model.
-5. The current runtime endpoint is `http://127.0.0.1:8080`.
+5. The expected local inference endpoint is `http://127.0.0.1:8080`; confirm it during the next read-only runtime audit.
 6. The live llama.cpp API is the runtime source of truth when verifying the active model/service.
 7. **CLL is retired from the architecture**; it is not required for the current OpenCode → llama.cpp path.
 8. The existing PC remains the starting hardware platform.

@@ -2,7 +2,7 @@
 
 A local-first personal AI system designed to be useful, secure, reliable, maintainable and upgradeable.
 
-## Current Status — 1 October 2026
+## Current Status — 25 October 2026
 
 **Project:** AI Masterpiece
 **Current implementation track:** Vektor
@@ -14,12 +14,14 @@ The project has now crossed from pure planning into controlled implementation ex
 ```text
 VEKTOR
   ↓
-Claude Code            [HARNESS]
+OpenCode               [CURRENT AGENT HARNESS — INTEGRATION TO RE-VERIFY]
   ↓
 llama.cpp              [INFERENCE ENGINE]
   ↓
 Qwen 3.5 9B Q4_K_M    [CURRENT LOCAL MODEL]
 ```
+
+Morphy is a GUI/control-room candidate under evaluation, not a locked component. Claude Code was superseded as the primary harness on 4 October 2026.
 
 ### Verified prototype
 
@@ -29,8 +31,8 @@ Qwen 3.5 9B Q4_K_M    [CURRENT LOCAL MODEL]
 - health endpoint verified
 - OpenAI-compatible model endpoint verified
 - model ID observed as `qwen3.5-9b`
-- Claude Code connected to the local endpoint
-- local inference successfully exercised
+- local inference was successfully exercised through the former Claude Code harness
+- OpenCode is the accepted current harness, but its connection to the local endpoint must be re-verified
 
 This is a **verified prototype**, not a declaration that the whole Vektor system is complete.
 
@@ -39,12 +41,12 @@ This is a **verified prototype**, not a declaration that the whole Vektor system
 The following are locked as the current implementation baseline, subject to later evidence-based revision:
 
 1. **Vektor** is the current system/runtime project name.
-2. **Claude Code** is the current control/harness layer.
+2. **OpenCode** is the current agent harness/control layer (decision accepted 4 October 2026; live integration still requires verification).
 3. **llama.cpp** is the current local inference engine.
 4. **Qwen 3.5 9B Q4_K_M** is the current local model.
 5. The current runtime endpoint is `http://127.0.0.1:8080`.
 6. The live llama.cpp API is the runtime source of truth when verifying the active model/service.
-7. **CLL is retired from the architecture**; it is not required for the current Claude Code → llama.cpp path.
+7. **CLL is retired from the architecture**; it is not required for the current OpenCode → llama.cpp path.
 8. The existing PC remains the starting hardware platform.
 
 These decisions lock the **current prototype**, not every future subsystem. Memory, Obsidian, MCP, agents, routing, automation, voice, cloud split and advanced computer control remain separate design decisions.
@@ -83,11 +85,13 @@ The model cannot grant itself permissions. Capability and authority remain separ
 
 Remaining acceptance work:
 
+- [ ] Verify OpenCode version, effective configuration, selected provider/model and connection to llama.cpp
 - [ ] Final read-only Vektor Doctor
 - [ ] Reproducible startup procedure
 - [ ] Repeatable benchmark/verification record
 - [ ] Runtime documentation committed
 - [ ] Trello state reconciled with the implementation
+- [ ] Evaluate Morphy as an optional GUI without treating it as selected until approved
 - [ ] Confirm recovery/restart procedure
 
 Only after this milestone should additional layers be added.
